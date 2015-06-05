@@ -2,8 +2,23 @@ package p20150605;
 
 import java.io.File;
 
+/**
+ *  La clase AudioSpot sirve de base para gestionar cuñas de anuncios 
+ * publicitarios en radio, almacenar metadatos sobre le nuncio y una refrencia 
+ * al archivo de audio que lo contine. Además, permite programar la cuña
+ * dentro de una secuencia de audio clips y exportarla aun formato propio.
+ * 
+ * @author Ginés Cuenca Martínez
+ * @version 1.0.1
+ * 
+ */
+
+
+
+
 public class AudioSpot
 {
+    
     private File archivo;       // manejador para el archivo que contiene el audio (.mp3)
     private int duracion;       // duración del audio, en segundos
     private String producto;    // nombre del producto anunciado
@@ -19,13 +34,24 @@ public class AudioSpot
         this.anunciante = "";
         this.lasterrormsg = "";
     }
-    
+    /**
+     * Establece los metadatos del spot (nombre del producto y nombre 
+     * del anunciantes)
+     * 
+     * @param producto
+     * @param anunciante 
+     */
     public void setMetaDatos (String producto, String anunciante)
     {
         this.producto = producto;
         this.anunciante = anunciante;
     }
-    
+    /**
+     * Establece la duración del spot
+     * 
+     * @param duracion
+     * @throws IllegalArgumentException 
+     */
     public void setDuracion(int duracion) throws IllegalArgumentException
     {
         if (duracion<0)
@@ -34,13 +60,25 @@ public class AudioSpot
             throw new IllegalArgumentException ("Duración demasiado larga");
         this.duracion = duracion;
     }
-    
+    /**
+     * Etablece el vínculo creado con el fichero de audio
+     * 
+     * @param nombre_archivo
+     * @return 
+     */
     public Boolean setArchivo(String nombre_archivo)
     {
         this.archivo = new File(nombre_archivo);
         return this.archivo.exists();
     }
-    
+    /**
+     * ProgramaEnCola realiza una comprobación de todos los datos del spot
+     * , en caso de dar error mostrará un error a través de un valor entero 
+     * negativo, si los datos son correctos se podrá programar.
+     * 
+     * @param cola_reproduccion
+     * @return 
+     */
     public int ProgramaEnCola(Object cola_reproduccion)
     {
         // comprobamos previamente que no falte nada
@@ -84,7 +122,14 @@ public class AudioSpot
         else
             return resultado;
     }
-    
+    /**
+     * ExportaAFormatoDAW realiza una comprobación de todos los datos del spot
+     * , en caso de dar error mostrará un error a través de un valor entero 
+     * negativo, si los datos son correctos se exportará en el nuevo formato.
+     * 
+     * @param objeto_daw
+     * @return 
+     */
     public int ExportaAFormatoDAW(Object objeto_daw)
     {
         // comprobamos previamente que no falte nada
